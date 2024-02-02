@@ -28,7 +28,7 @@ export const ORIGIN =
 
 export const litNodeClient: LitNodeClient = new LitNodeClient({
   alertWhenUnauthorized: false,
-  litNetwork: 'cayenne',
+  litNetwork: 'habanero',
   debug: true,
 });
 
@@ -165,14 +165,14 @@ export async function authenticateWithStytch(
   userId?: string,
   method?: string
 ) {
-  let provider: BaseProvider
-  if (method === "email") {
+  let provider: BaseProvider;
+  if (method === 'email') {
     provider = litAuthClient.initProvider(ProviderType.StytchEmailFactorOtp, {
       appId: process.env.NEXT_PUBLIC_STYTCH_PROJECT_ID,
     });
   } else {
     provider = litAuthClient.initProvider(ProviderType.StytchSmsFactorOtp, {
-      appId: process.env.NEXT_PUBLIC_STYTCH_PROJECT_ID
+      appId: process.env.NEXT_PUBLIC_STYTCH_PROJECT_ID,
     });
   }
 
@@ -274,6 +274,8 @@ function getProviderByAuthMethod(authMethod: AuthMethod) {
       return litAuthClient.getProvider(ProviderType.EthWallet);
     case AuthMethodType.WebAuthn:
       return litAuthClient.getProvider(ProviderType.WebAuthn);
+    case AuthMethodType.StytchOtp:
+      return litAuthClient.getProvider(ProviderType.StytchOtp);
     case AuthMethodType.StytchEmailFactorOtp:
       return litAuthClient.getProvider(ProviderType.StytchEmailFactorOtp);
     case AuthMethodType.StytchSmsFactorOtp:
