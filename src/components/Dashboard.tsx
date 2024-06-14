@@ -36,7 +36,7 @@ export default function Dashboard({
       const pkpWallet = new PKPEthersWallet({
         controllerSessionSigs: sessionSigs,
         pkpPubKey: currentAccount.publicKey,
-        litNetwork: 'manzano',
+        litNetwork: 'cayenne',
         litNodeClient: litNodeClient,
       });
       await pkpWallet.init();
